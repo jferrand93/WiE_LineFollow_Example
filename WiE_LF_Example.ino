@@ -2,11 +2,9 @@ int leftEnPin = 8;
 int leftPWMP = 6; //2A
 int leftPWMN = 5; //1A
 
-//int rightEnPin = ;
-//int rightPWMP = 6; //3A
-//int rightPWMN = 5; //4A
-
-int pwmSpeed = 255; //0 - 255
+int rightEnPin = 7;
+int rightPWMP = 10; //3A
+int rightPWMN = 11; //4A
 
 void setup() {
   pinMode(leftEnPin, OUTPUT);
@@ -18,47 +16,50 @@ void setup() {
   pinMode(rightPWMN, OUTPUT);
 
 }
-void driveForward(){
+void driveForward(int speedValue){
   digitalWrite(leftEnPin, HIGH);
-  analogWrite(leftPWMP, pwmSpeed);
+  analogWrite(leftPWMP, speedValue);
   analogWrite(leftPWMN, 0);
 
   digitalWrite(rightEnPin, HIGH);
-  analogWrite(rightPWMP, pwmSpeed);
+  analogWrite(rightPWMP, speedValue);
   analogWrite(rightPWMN, 0);
 }
 
-void driveBackward(){
+void driveBackward(int speedValue){
   digitalWrite(leftEnPin, HIGH);
   analogWrite(leftPWMP, 0);
-  analogWrite(leftPWMN, pwmSpeed);
+  analogWrite(leftPWMN, speedValue);
 
   digitalWrite(rightEnPin, HIGH);
   analogWrite(rightPWMP, 0);
-  analogWrite(rightPWMN, pwmSpeed);
+  analogWrite(rightPWMN, speedValue);
 }
 
-void driveRight(){
+void driveRight(int speedValue){
   digitalWrite(leftEnPin, HIGH);
-  analogWrite(leftPWMP, pwmSpeed);
+  analogWrite(leftPWMP, speedValue);
   analogWrite(leftPWMN, 0);
 
   digitalWrite(rightEnPin, HIGH);
   analogWrite(rightPWMP, 0);
-  analogWrite(rightPWMN, pwmSpeed);
+  analogWrite(rightPWMN, speedValue);
 }
 
-void driveLeft(){
+void driveLeft(int speedValue){
   digitalWrite(leftEnPin, HIGH);
   analogWrite(leftPWMP, 0);
-  analogWrite(leftPWMN, pwmSpeed);
+  analogWrite(leftPWMN, speedValue);
 
   digitalWrite(rightEnPin, HIGH);
-  analogWrite(rightPWMP, pwmSpeed);
+  analogWrite(rightPWMP, speedValue);
   analogWrite(rightPWMN, 0);
 }
 void loop() {
   
-
+driveForward(255);
+delay(2000); 
+driveBackward(255);
+delay(2000);
 
 }
