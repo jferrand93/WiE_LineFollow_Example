@@ -13,6 +13,8 @@ int sensorVal;
 int triggerPin = 3;
 int echoPin = 4;
 
+float objectDistance;
+
 void setup() {
   pinMode(leftEnPin, OUTPUT);
   pinMode(leftPWMP, OUTPUT);
@@ -29,14 +31,12 @@ void setup() {
 
 }
 void loop() {
-  /* sensorVal = analogRead(irSensor);
-  Serial.print(sensorVal);
-  Serial.println(); 
-  delay(500); */
-  /*driveForward(255);
-  delay(2000); 
-  driveBackward(255);
-  delay(2000);*/
+  objectDistance = distanceSensor();
+  
+  if(objectDistance > 10) driveForward(255);
+  if(objectDistance < 10) driveBackward(255);
+  
+  delay(100); 
 }
 
 void driveForward(int speedValue){
