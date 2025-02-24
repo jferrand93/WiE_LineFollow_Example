@@ -15,6 +15,7 @@ int echoPin = 4;
 
 float objectDistance;
 
+// Setup your pins for input and output
 void setup() {
   pinMode(leftEnPin, OUTPUT);
   pinMode(leftPWMP, OUTPUT);
@@ -30,6 +31,8 @@ void setup() {
   Serial.begin(9600);
 
 }
+ 
+// This is where your code is going to be run 
 void loop() {
   objectDistance = distanceSensor();
   
@@ -38,6 +41,9 @@ void loop() {
   
   delay(100); 
 }
+
+
+// Super Helpful functions below 
 
 void driveForward(int speedValue){
   digitalWrite(leftEnPin, HIGH);
