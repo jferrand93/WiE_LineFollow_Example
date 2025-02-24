@@ -6,6 +6,13 @@ int rightEnPin = 7;
 int rightPWMP = 10; //3A
 int rightPWMN = 11; //4A
 
+int irSensor = A0; 
+
+int sensorVal;
+
+int triggerPin = 3;
+int echoPin = 4;
+
 void setup() {
   pinMode(leftEnPin, OUTPUT);
   pinMode(leftPWMP, OUTPUT);
@@ -14,6 +21,11 @@ void setup() {
   pinMode(rightEnPin, OUTPUT);
   pinMode(rightPWMP, OUTPUT);
   pinMode(rightPWMN, OUTPUT);
+
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  Serial.begin(9600);
 
 }
 void driveForward(int speedValue){
@@ -55,11 +67,29 @@ void driveLeft(int speedValue){
   analogWrite(rightPWMP, speedValue);
   analogWrite(rightPWMN, 0);
 }
-void loop() {
-  
-driveForward(255);
-delay(2000); 
-driveBackward(255);
-delay(2000);
 
+int distanceSensor(){
+  float duration, distance;
+
+  digitalWrite(triggerPin, LOW);  
+	delayMicroseconds(2);  
+	digitalWrite(triggerPin, HIGH);  
+	delayMicroseconds(10);  
+	digitalWrite(triggerPin, LOW); 
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration*.0343)/2;
+  return distance;
+}
+
+
+void loop() {
+  Serial.print(distanceSensor());
+  Serial.println();
+  delay(100);
+  
+  /*driveForward(255);
+  delay(2000); 
+  driveBackward(255);
+  delay(2000);*/
 }
