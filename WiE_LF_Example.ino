@@ -28,6 +28,17 @@ void setup() {
   Serial.begin(9600);
 
 }
+void loop() {
+  /* sensorVal = analogRead(irSensor);
+  Serial.print(sensorVal);
+  Serial.println(); 
+  delay(500); */
+  /*driveForward(255);
+  delay(2000); 
+  driveBackward(255);
+  delay(2000);*/
+}
+
 void driveForward(int speedValue){
   digitalWrite(leftEnPin, HIGH);
   analogWrite(leftPWMP, speedValue);
@@ -79,17 +90,8 @@ int distanceSensor(){
 
   duration = pulseIn(echoPin, HIGH);
   distance = (duration*.0343)/2;
+  Serial.print(distance);
+  Serial.println();
   return distance;
 }
 
-
-void loop() {
-  Serial.print(distanceSensor());
-  Serial.println();
-  delay(100);
-  
-  /*driveForward(255);
-  delay(2000); 
-  driveBackward(255);
-  delay(2000);*/
-}
